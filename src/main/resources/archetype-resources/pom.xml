@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<packaging>war</packaging>
+
+	<name>${artifactId}</name>
+
+	<properties>
+		<!-- Encoding  -->
+		<project.encoding>UTF-8</project.encoding>
+		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+
+		<!-- Java Version -->
+		<java.version>11</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+		<!-- ================================================================================== -->
+		<!-- Dependencies -->
+		<!-- ================================================================================== -->
+		<!-- General-->
+		<version.apache.commons-lang>3.12.0</version.apache.commons-lang>
+		<version.org.mapstruct>1.4.2.Final</version.org.mapstruct>
+
+		<!-- EE & Co. -->
+		<version.jakartaee>8.0.0</version.jakartaee>
+		<version.javax.servlet-api>4.0.1</version.javax.servlet-api>
+		<version.javax.annotation-api>1.3.2</version.javax.annotation-api>
+
+		<!-- WildFly -->
+		<version.wildfly>24.0.1.Final</version.wildfly>
+
+		<!-- Wicket & Co. -->
+		<version.wicket>9.7.0</version.wicket>
+		<version.wicketstuff>9.6.0</version.wicketstuff>
+		<version.wicket.bootstrap>6.0.0-M5</version.wicket.bootstrap>
+		<version.font.awesome>5.15.4</version.font.awesome>
+
+		<!-- Logging -->
+		<version.slf4j>1.7.32</version.slf4j>
+		<version.log4j-slf4j-impl>2.14.1</version.log4j-slf4j-impl>
+
+		<!-- Testing -->
+		<version.junit>5.8.2</version.junit>
+		<version.hamcrest>2.2</version.hamcrest>
+		<version.mockito>4.1.0</version.mockito>
+
+		<!-- ================================================================================== -->
+		<!-- Plugins -->
+		<!-- ================================================================================== -->
+		<version.resources.plugin>3.2.0</version.resources.plugin>
+		<version.compiler.plugin>3.8.1</version.compiler.plugin>
+		<version.jar.plugin>3.2.0</version.jar.plugin>
+		<version.war.plugin>3.3.2</version.war.plugin>
+		<version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
+		<version.install.plugin>3.0.0-M1</version.install.plugin>
+		<version.deploy.plugin>3.0.0-M1</version.deploy.plugin>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Jakarta EE - WildFly -->
+			<!-- http://www.mastertheboss.com/jboss-frameworks/jboss-maven/using-wildfly-boms -->
+			<!-- https://mvnrepository.com/artifact/org.wildfly.bom/wildfly-jakartaee8 -->
+			<dependency>
+				<groupId>org.wildfly.bom</groupId>
+				<artifactId>wildfly-jakartaee8</artifactId>
+				<version>${version.wildfly}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- ========== WildFly Container BOM ====================================================================== -->
+		<!-- EJB -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- CDI -->
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- ======================================================================================================= -->
+
+		<!-- Javax Annotation API -->
+		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>${version.javax.annotation-api}</version>
+		</dependency>
+
+		<!-- Jakarta EE -->
+		<!-- https://jakarta.ee -->
+		<!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>${version.jakartaee}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Javax Servlet -->
+		<!-- For Wicket Tester purpose only -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${version.javax.servlet-api}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Wicket -->
+		<!-- https://wicket.apache.org -->
+		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-core -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-core</artifactId>
+			<version>${version.wicket}</version>
+		</dependency>
+
+		<!-- Wicket Optional -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId>
+			<version>${version.wicket}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-cdi</artifactId>
+			<version>${version.wicket}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-auth-roles</artifactId>
+			<version>${version.wicket}</version>
+		</dependency>
+
+		<!-- Wicket Bootstrap -->
+		<!-- https://github.com/l0rdn1kk0n/wicket-bootstrap -->
+		<!-- https://mvnrepository.com/artifact/de.agilecoders.wicket/wicket-bootstrap-core -->
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-core</artifactId>
+			<version>${version.wicket.bootstrap}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-extensions</artifactId>
+			<version>${version.wicket.bootstrap}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-themes</artifactId>
+			<version>${version.wicket.bootstrap}</version>
+		</dependency>
+
+		<!-- WicketStuff -->
+		<!-- https://wicketstuff.org -->
+		<!-- https://mvnrepository.com/artifact/org.wicketstuff/wicketstuff-select2 -->
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-select2</artifactId>
+			<version>${version.wicketstuff}</version>
+		</dependency>
+
+		<!-- Font Awesome -->
+		<!-- https://www.webjars.org -->
+		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>${version.font.awesome}</version>
+		</dependency>
+
+		<!-- Apache Commons -->
+		<!-- https://commons.apache.org -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${version.apache.commons-lang}</version>
+		</dependency>
+
+		<!-- MapStruct -->
+		<!-- https://mapstruct.org -->
+		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${version.org.mapstruct}</version>
+		</dependency>
+
+		<!-- Logging -->
+		<!-- http://www.slf4j.org -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version.slf4j}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://logging.apache.org/log4j/2.x/index.html -->
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${version.log4j-slf4j-impl}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- JUnit 5 -->
+		<!-- https://junit.org/junit5 -->
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Hamcrest -->
+		<!-- http://hamcrest.org/JavaHamcrest -->
+		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>${version.hamcrest}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Mockito -->
+		<!-- https://site.mockito.org -->
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${version.mockito}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>${version.mockito}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+
+		<pluginManagement>
+			<plugins>
+				<!-- Resources -->
+				<!-- https://maven.apache.org/plugins/maven-resources-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${version.resources.plugin}</version>
+				</plugin>
+
+				<!-- Compiler -->
+				<!-- https://maven.apache.org/plugins/maven-compiler-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${version.compiler.plugin}</version>
+					<configuration>
+						<release>${java.version}</release>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<showWarnings>true</showWarnings>
+						<showDeprecation>true</showDeprecation>
+					</configuration>
+				</plugin>
+
+				<!-- Jar -->
+				<!-- https://maven.apache.org/plugins/maven-jar-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${version.jar.plugin}</version>
+				</plugin>
+
+				<!-- War -->
+				<!-- https://maven.apache.org/plugins/maven-war-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.war.plugin}</version>
+				</plugin>
+
+				<!-- Surefire -->
+				<!-- https://maven.apache.org/surefire/maven-surefire-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${version.surefire.plugin}</version>
+				</plugin>
+
+				<!-- Install -->
+				<!-- https://maven.apache.org/plugins/maven-install-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${version.install.plugin}</version>
+				</plugin>
+
+				<!-- Deploy -->
+				<!-- https://maven.apache.org/plugins/maven-deploy-plugin -->
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${version.deploy.plugin}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<!-- Compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${version.org.mapstruct}</version>
+						</path>
+					</annotationProcessorPaths>
+					<annotationProcessors>
+						<processor>org.mapstruct.ap.MappingProcessor</processor>
+					</annotationProcessors>
+					<compilerArgs>
+						<arg>-Amapstruct.unmappedTargetPolicy=ERROR</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+
+			<!-- Surefire -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
