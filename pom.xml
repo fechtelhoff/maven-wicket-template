@@ -19,13 +19,13 @@
 		<project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
 
 		<!-- Java Version -->
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
 		<!-- Plugin / Extension Version -->
 		<version.resources.plugin>3.2.0</version.resources.plugin>
-		<version.archetype-packaging.extension>3.2.0</version.archetype-packaging.extension>
+		<version.archetype-packaging.extension>3.2.1</version.archetype-packaging.extension>
 	</properties>
 
 	<build>
