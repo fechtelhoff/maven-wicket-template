@@ -28,6 +28,7 @@
 		<!-- General-->
 		<version.apache.commons-lang>3.11</version.apache.commons-lang> <!-- aus WildFly Container -->
 		<version.org.mapstruct>1.4.2.Final</version.org.mapstruct>
+		<version.classgraph>4.8.146</version.classgraph>
 
 		<!-- EE & Co. -->
 		<version.jakartaee>8.0.0</version.jakartaee>
@@ -41,7 +42,7 @@
 		<version.wicket>9.9.1</version.wicket>
 		<version.wicketstuff>9.9.1</version.wicketstuff>
 		<version.wicket.bootstrap>6.0.0-M6</version.wicket.bootstrap>
-		<version.font.awesome>6.1.0</version.font.awesome>
+		<version.bootstrap-icons>1.8.1</version.bootstrap-icons>
 
 		<!-- Logging -->
 		<version.slf4j>1.7.32</version.slf4j> <!-- aus WildFly Container -->
@@ -178,13 +179,13 @@
 			<version>${version.wicketstuff}</version>
 		</dependency>
 
-		<!-- Font Awesome -->
-		<!-- https://www.webjars.org -->
-		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+		<!-- Bootstrap Icons -->
+		<!-- https://icons.getbootstrap.com -->
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/bootstrap-icons -->
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>font-awesome</artifactId>
-			<version>${version.font.awesome}</version>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>bootstrap-icons</artifactId>
+			<version>${version.bootstrap-icons}</version>
 		</dependency>
 
 		<!-- Apache Commons -->
@@ -204,6 +205,16 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>${version.org.mapstruct}</version>
+		</dependency>
+
+		<!-- Classgraph -->
+		<!-- https://github.com/classgraph/classgraph -->
+		<!-- https://mvnrepository.com/artifact/io.github.classgraph/classgraph -->
+		<dependency>
+			<groupId>io.github.classgraph</groupId>
+			<artifactId>classgraph</artifactId>
+			<version>${version.classgraph}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Logging -->
