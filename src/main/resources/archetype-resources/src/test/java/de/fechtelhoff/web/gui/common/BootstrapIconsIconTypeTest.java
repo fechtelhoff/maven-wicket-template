@@ -6,19 +6,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.Resource;
+import io.github.classgraph.ScanResult;
 
 /**
  * Dieser Test erzeugt aus der über WebJars eingebunden Resource der Bootstrap-Icons automatische
  * die Java Variablendeklarationen für die Icon-Types. Der Output muss manuell in die Klasse
- * <pre>org.iqtig.od.td.guishared.common.bootstrap.icons.BootstrapIconsIconType</pre>
- * eingefügt werden.
+ * <pre>BootstrapIconsIconType</pre> eingefügt werden.
  * <p/>
  * Dies sollte immer dann ausgeführt werden, wenn eine neue Version der Bootstrap-Icons eingebunden wird.
  */
@@ -40,11 +39,11 @@ class BootstrapIconsIconTypeTest {
 			.filter(e -> e.startsWith(".bi-"))
 			.map(this::getCssName)
 			.sorted()
-			.collect(Collectors.toList());
+			.toList();
 
 		final List<String> javaCodeLines = cssElements.stream()
 			.map(this::generateJavaCode)
-			.collect(Collectors.toList());
+			.toList();
 
 		javaCodeLines.forEach(System.out::println);
 	}
@@ -98,12 +97,10 @@ class BootstrapIconsIconTypeTest {
 	 */
 	private Optional<Resource> getResource(final ResourceReference resourceReference) {
 		final String resourceReferenceName = resourceReference.getName();
-		return new ClassGraph()
-			.enableAllInfo()
-			.scan()
-			.getAllResources()
-			.stream()
-			.filter(resource -> resource.toString().endsWith(resourceReferenceName))
-			.findFirst();
+		try (final ScanResult scanResult = new ClassGraph().enableAllInfo().scan()) {
+			return scanResult.getAllResources().stream()
+				.filter(resource -> resource.toString().endsWith(resourceReferenceName))
+				.findFirst();
+		}
 	}
 }

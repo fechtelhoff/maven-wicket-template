@@ -7,8 +7,8 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.image.IconType;
  * Die Klasse definiert die zu den Bootstrap-Icons gehörigen Icon-Types.
  * <p/>
  * Die einzelnen Variablen können über die manuelle Ausführung des zu dieser Klasse gehörenden Tests
- * <pre>org.iqtig.od.td.guishared.common.bootstrap.icons.BootstrapIconsIconTypeTest</pre>
- * automatisch generiert werden und müssen nur noch manuell in diese Klasse überführt werden.
+ * <pre>BootstrapIconsIconTypeTest</pre> automatisch generiert werden
+ * und müssen nur noch manuell in diese Klasse überführt werden.
  * <p/>
  * Die Bootstrap Icons können unter <a href="https://icons.getbootstrap.com">https://icons.getbootstrap.com</a> angezeigt und durchsucht werden.
  */
