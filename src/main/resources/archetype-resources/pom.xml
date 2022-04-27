@@ -38,10 +38,10 @@
 		<version.wildfly>26.0.1.Final</version.wildfly>
 
 		<!-- Wicket & Co. -->
-		<version.wicket>9.8.0</version.wicket>
-		<version.wicketstuff>9.8.0</version.wicketstuff>
+		<version.wicket>9.9.1</version.wicket>
+		<version.wicketstuff>9.9.1</version.wicketstuff>
 		<version.wicket.bootstrap>6.0.0-M6</version.wicket.bootstrap>
-		<version.font.awesome>6.0.0</version.font.awesome>
+		<version.font.awesome>6.1.0</version.font.awesome>
 
 		<!-- Logging -->
 		<version.slf4j>1.7.32</version.slf4j> <!-- aus WildFly Container -->
@@ -49,7 +49,7 @@
 		<!-- Testing -->
 		<version.junit>5.8.2</version.junit>
 		<version.hamcrest>2.2</version.hamcrest>
-		<version.mockito>4.3.1</version.mockito>
+		<version.mockito>4.5.1</version.mockito>
 
 		<!-- ================================================================================== -->
 		<!-- Plugins -->
