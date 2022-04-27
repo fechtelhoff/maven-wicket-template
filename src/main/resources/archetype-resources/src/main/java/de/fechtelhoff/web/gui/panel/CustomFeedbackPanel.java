@@ -27,23 +27,12 @@ public class CustomFeedbackPanel extends FeedbackPanel {
 
 	@Override
 	protected String getCSSClass(final FeedbackMessage message) {
-		String css;
-		switch (message.getLevel()) {
-			case FeedbackMessage.SUCCESS:
-				css = "alert alert-success";
-				break;
-			case FeedbackMessage.INFO:
-				css = "alert alert-info";
-				break;
-			case FeedbackMessage.ERROR:
-				css = "alert alert-danger";
-				break;
-			case FeedbackMessage.WARNING:
-				css = "alert alert-warning";
-				break;
-			default:
-				css = "alert";
-		}
-		return css;
+		return switch (message.getLevel()) {
+			case FeedbackMessage.SUCCESS -> "alert alert-success";
+			case FeedbackMessage.INFO -> "alert alert-info";
+			case FeedbackMessage.ERROR -> "alert alert-danger";
+			case FeedbackMessage.WARNING -> "alert alert-warning";
+			default -> "alert";
+		};
 	}
 }
