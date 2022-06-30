@@ -22,6 +22,11 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public void init() {
 		super.init();
+
+		//  Content Security Policy
+//		getCspSettings().blocking().disabled();
+//		getCspSettings().blocking().unsafeInline();
+
 		initializeCdi();
 		initializeBootstrap();
 		mountPages();
