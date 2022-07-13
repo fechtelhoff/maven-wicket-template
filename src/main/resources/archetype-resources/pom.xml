@@ -29,7 +29,7 @@
 		<!-- General-->
 		<version.apache.commons-lang>3.11</version.apache.commons-lang> <!-- aus WildFly Container,  -->
 		<version.org.mapstruct>1.5.2.Final</version.org.mapstruct>
-		<version.classgraph>4.8.147</version.classgraph>
+		<version.classgraph>4.8.149</version.classgraph>
 
 		<!-- EE & Co. -->
 		<version.jakartaee>8.0.0</version.jakartaee>
@@ -40,8 +40,8 @@
 		<version.wildfly>26.1.1.Final</version.wildfly>
 
 		<!-- Wicket & Co. -->
-		<version.wicket>9.10.0</version.wicket>
-		<version.wicketstuff>9.10.0</version.wicketstuff>
+		<version.wicket>9.11.0</version.wicket>
+		<version.wicketstuff>9.11.0</version.wicketstuff>
 
 		<!-- Wicket Bootstrap Version 4.0.4    -> Bootstrap Version 3.4.1 -->
 		<!-- Wicket Bootstrap Version 5.0.6    -> Bootstrap Version 4.6.0-1 -->
