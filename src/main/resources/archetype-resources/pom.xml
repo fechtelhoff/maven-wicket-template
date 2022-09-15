@@ -27,7 +27,7 @@
 		<!-- Dependencies -->
 		<!-- ================================================================================== -->
 		<!-- General-->
-		<version.apache.commons-lang>3.11</version.apache.commons-lang> <!-- aus WildFly Container,  -->
+		<version.apache.commons-lang>3.12.0</version.apache.commons-lang> <!-- aus WildFly Container -->
 		<version.org.mapstruct>1.5.2.Final</version.org.mapstruct>
 		<version.classgraph>4.8.149</version.classgraph>
 
@@ -37,7 +37,7 @@
 		<version.javax.annotation-api>1.3.2</version.javax.annotation-api>
 
 		<!-- WildFly -->
-		<version.wildfly>26.1.1.Final</version.wildfly>
+		<version.wildfly>26.1.2.Final</version.wildfly>
 
 		<!-- Wicket & Co. -->
 		<version.wicket>9.11.0</version.wicket>
@@ -48,7 +48,7 @@
 		<!-- Wicket Bootstrap Version 6.0.0-M7 -> Bootstrap Version 5.1.3 - scheint nicht fehlerfrei zu funktionieren. -->
 		<version.wicket.bootstrap>5.0.6</version.wicket.bootstrap>
 
-		<version.bootstrap-icons>1.8.3</version.bootstrap-icons>
+		<version.bootstrap-icons>1.9.1</version.bootstrap-icons>
 
 		<!-- Logging -->
 		<version.slf4j>1.7.36</version.slf4j> <!-- aus WildFly Container -->
@@ -56,7 +56,8 @@
 		<!-- Testing -->
 		<version.junit>5.9.0</version.junit>
 		<version.hamcrest>2.2</version.hamcrest>
-		<version.mockito>4.7.0</version.mockito>
+		<version.mockito>4.8.0</version.mockito>
+		<version.byte-buddy>1.12.14</version.byte-buddy><!-- Wird in genau dieser Version für Mockito benötigt. -->
 
 		<!-- ================================================================================== -->
 		<!-- Plugins -->
@@ -249,12 +250,6 @@
 			<version>${version.junit}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-params</artifactId>
-			<version>${version.junit}</version>
-			<scope>test</scope>
-		</dependency>
 
 		<!-- Hamcrest -->
 		<!-- http://hamcrest.org/JavaHamcrest -->
@@ -279,6 +274,16 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<version>${version.mockito}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Byte Buddy -->
+		<!-- Wird für Mockito benötigt! Siehe https://howtodoinjava.com/mockito/plugin-mockmaker-error -->
+		<!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy -->
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<version>${version.byte-buddy}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

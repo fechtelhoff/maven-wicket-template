@@ -9,6 +9,8 @@ import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.agilecoders.wicket.core.settings.ThemeProvider;
 import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchTheme;
 import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchThemeProvider;
+import de.agilecoders.wicket.webjars.WicketWebjars;
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 import de.fechtelhoff.web.gui.HomePage;
 
 public class WicketTestApplication extends WebApplication {
@@ -21,6 +23,11 @@ public class WicketTestApplication extends WebApplication {
 	@Override
 	public void init() {
 		super.init();
+		initializeBootstrap();
+		initializeWebJars();
+	}
+
+	private void initializeBootstrap() {
 		final IBootstrapSettings bootstrapSettings = new BootstrapSettings();
 
 		final ThemeProvider themeProvider = new BootswatchThemeProvider(BootswatchTheme.Cerulean);
@@ -28,5 +35,11 @@ public class WicketTestApplication extends WebApplication {
 		bootstrapSettings.setActiveThemeProvider(new CookieThemeProvider());
 
 		Bootstrap.install(this, bootstrapSettings);
+	}
+
+	private void initializeWebJars() {
+		final WebjarsSettings settings = new WebjarsSettings();
+		settings.useCdnResources(false);
+		WicketWebjars.install(this, settings);
 	}
 }

@@ -8,5 +8,6 @@ target
 *.iml
 *.bak
 *.csv
+*.log
 *.sql
 rebel.xml

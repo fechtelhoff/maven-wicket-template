@@ -10,6 +10,8 @@ import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.agilecoders.wicket.core.settings.ThemeProvider;
 import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchTheme;
 import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchThemeProvider;
+import de.agilecoders.wicket.webjars.WicketWebjars;
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 import de.fechtelhoff.web.gui.HomePage;
 
 public class WicketApplication extends WebApplication {
@@ -23,15 +25,26 @@ public class WicketApplication extends WebApplication {
 	public void init() {
 		super.init();
 
-		//  Content Security Policy
-//		getCspSettings().blocking().disabled();
-//		getCspSettings().blocking().unsafeInline();
+		// initializeCsp();
 
 		initializeCdi();
 		initializeBootstrap();
+		initializeWebJars();
+
 		mountPages();
 	}
 
+	/**
+	 * Initialize Content Security Policy
+	 */
+	private void initializeCsp() {
+		getCspSettings().blocking().disabled();
+		getCspSettings().blocking().unsafeInline();
+	}
+
+	/**
+	 * Initialize Contexts and Dependency Injection
+	 */
 	private void initializeCdi() {
 		new CdiConfiguration().configure(this);
 	}
@@ -42,6 +55,12 @@ public class WicketApplication extends WebApplication {
 		bootstrapSettings.setThemeProvider(themeProvider);
 		bootstrapSettings.setActiveThemeProvider(new CookieThemeProvider());
 		Bootstrap.install(this, bootstrapSettings);
+	}
+
+	private void initializeWebJars() {
+		final WebjarsSettings settings = new WebjarsSettings();
+		settings.useCdnResources(false);
+		WicketWebjars.install(this, settings);
 	}
 
 	private void mountPages() {
