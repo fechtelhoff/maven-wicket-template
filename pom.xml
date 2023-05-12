@@ -24,9 +24,9 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
 		<!-- Plugin / Extension Version -->
-		<version.resources.plugin>3.2.0</version.resources.plugin>
-		<version.archetype.plugin>3.2.1</version.archetype.plugin>
 		<version.archetype-packaging.extension>3.2.1</version.archetype-packaging.extension>
+		<version.archetype.plugin>3.2.1</version.archetype.plugin>
+		<version.resources.plugin>3.3.1</version.resources.plugin>
 	</properties>
 
 	<build>
