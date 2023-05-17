@@ -9,6 +9,17 @@
 		<!-- Source-->
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src</directory>
+			<excludes>
+				<!-- Do not filter binary files -->
+				<exclude>**/*.ico</exclude>
+			</excludes>
+		</fileSet>
+		<fileSet filtered="false">
+			<directory>src</directory>
+			<includes>
+				<!-- Do not filter binary files -->
+				<include>**/*.ico</include>
+			</includes>
 		</fileSet>
 
 		<!-- Root -->
