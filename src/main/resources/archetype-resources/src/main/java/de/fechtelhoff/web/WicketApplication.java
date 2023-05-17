@@ -25,8 +25,7 @@ public class WicketApplication extends WebApplication {
 	public void init() {
 		super.init();
 
-		// initializeCsp();
-
+		initializeCsp();
 		initializeCdi();
 		initializeBootstrap();
 		initializeWebJars();
@@ -34,17 +33,10 @@ public class WicketApplication extends WebApplication {
 		mountPages();
 	}
 
-	/**
-	 * Initialize Content Security Policy
-	 */
 	private void initializeCsp() {
 		getCspSettings().blocking().disabled();
-		getCspSettings().blocking().unsafeInline();
 	}
 
-	/**
-	 * Initialize Contexts and Dependency Injection
-	 */
 	private void initializeCdi() {
 		new CdiConfiguration().configure(this);
 	}
@@ -58,9 +50,9 @@ public class WicketApplication extends WebApplication {
 	}
 
 	private void initializeWebJars() {
-		final WebjarsSettings settings = new WebjarsSettings();
-		settings.useCdnResources(false);
-		WicketWebjars.install(this, settings);
+		final WebjarsSettings webjarsSettings = new WebjarsSettings();
+		webjarsSettings.useCdnResources(false);
+		WicketWebjars.install(this, webjarsSettings);
 	}
 
 	private void mountPages() {

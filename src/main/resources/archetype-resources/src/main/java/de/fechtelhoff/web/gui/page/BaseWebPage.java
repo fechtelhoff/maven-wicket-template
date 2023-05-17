@@ -2,19 +2,22 @@ package de.fechtelhoff.web.gui.page;
 
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class BaseWebPage extends WebPage {
+public abstract class BaseWebPage extends WebPage implements PageTitled {
 
-	public BaseWebPage() {
+	protected BaseWebPage() {
+		add(new Label("pageTitle", Model.of(getPageTitle())));
 	}
 
-	public BaseWebPage(final IModel<?> model) {
+	protected BaseWebPage(final IModel<?> model) {
 		super(model);
 	}
 
-	public BaseWebPage(final PageParameters parameters) {
+	protected BaseWebPage(final PageParameters parameters) {
 		super(parameters);
 	}
 

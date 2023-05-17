@@ -6,6 +6,7 @@ import org.apache.wicket.markup.head.MetaDataHeaderItem;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
+import de.fechtelhoff.web.gui.common.BootstrapIconsCssResourceReference;
 
 public final class HtmlHeaderSupport {
 
@@ -16,12 +17,7 @@ public final class HtmlHeaderSupport {
 	public static void renderHead(final IHeaderResponse response) {
 		addFaviconToHtmlHeader(response);
 		addCssToHtmlHeader(response);
-	}
-
-	private static void addCssToHtmlHeader(final IHeaderResponse response) {
-		final ResourceReference resourceReference = new PackageResourceReference(HtmlHeaderSupport.class, "style.css");
-		final CssHeaderItem headerItem = CssHeaderItem.forReference(resourceReference);
-		response.render(headerItem);
+		addBootstrapIconsToHtmlHeader(response);
 	}
 
 	private static void addFaviconToHtmlHeader(final IHeaderResponse response) {
@@ -33,5 +29,15 @@ public final class HtmlHeaderSupport {
 
 	private static String getContextPath() {
 		return RequestCycle.get().getRequest().getContextPath();
+	}
+
+	private static void addCssToHtmlHeader(final IHeaderResponse response) {
+		final ResourceReference resourceReference = new PackageResourceReference(HtmlHeaderSupport.class, "style.css");
+		final CssHeaderItem headerItem = CssHeaderItem.forReference(resourceReference);
+		response.render(headerItem);
+	}
+
+	private static void addBootstrapIconsToHtmlHeader(final IHeaderResponse response) {
+		response.render(BootstrapIconsCssResourceReference.asHeaderItem());
 	}
 }

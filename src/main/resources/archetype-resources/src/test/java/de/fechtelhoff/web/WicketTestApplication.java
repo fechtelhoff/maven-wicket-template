@@ -23,17 +23,21 @@ public class WicketTestApplication extends WebApplication {
 	@Override
 	public void init() {
 		super.init();
+
+		initializeCsp();
 		initializeBootstrap();
 		initializeWebJars();
 	}
 
+	private void initializeCsp() {
+		getCspSettings().blocking().disabled();
+	}
+
 	private void initializeBootstrap() {
 		final IBootstrapSettings bootstrapSettings = new BootstrapSettings();
-
 		final ThemeProvider themeProvider = new BootswatchThemeProvider(BootswatchTheme.Cerulean);
 		bootstrapSettings.setThemeProvider(themeProvider);
 		bootstrapSettings.setActiveThemeProvider(new CookieThemeProvider());
-
 		Bootstrap.install(this, bootstrapSettings);
 	}
 
