@@ -1,4 +1,4 @@
-package de.fechtelhoff.web.gui.common;
+package ${package}.web.gui.common;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import de.fechtelhoff.web.WicketTestApplication;
+import ${package}.web.WicketTestApplication;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.Resource;
 import io.github.classgraph.ScanResult;

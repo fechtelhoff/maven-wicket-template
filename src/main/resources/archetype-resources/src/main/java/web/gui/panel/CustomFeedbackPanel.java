@@ -1,4 +1,4 @@
-package de.fechtelhoff.web.gui.panel;
+package ${package}.web.gui.panel;
 
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.feedback.IFeedbackMessageFilter;

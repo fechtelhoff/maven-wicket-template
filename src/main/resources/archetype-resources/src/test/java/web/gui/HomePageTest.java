@@ -1,9 +1,9 @@
-package de.fechtelhoff.web.gui;
+package ${package}.web.gui;
 
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import de.fechtelhoff.web.WicketTestApplication;
+import ${package}.web.WicketTestApplication;
 
 class HomePageTest {
 

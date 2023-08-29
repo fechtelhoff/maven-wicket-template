@@ -1,9 +1,9 @@
-package de.fechtelhoff.web;
+package ${package}.web;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.wicket.markup.html.WebPage;
-import de.fechtelhoff.web.gui.HomePage;
+import ${package}.web.gui.HomePage;
 
 public final class WicketApplicationPrettyUrlConfig {
 

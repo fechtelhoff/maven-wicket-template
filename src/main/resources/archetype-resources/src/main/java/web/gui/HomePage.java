@@ -1,9 +1,9 @@
-package de.fechtelhoff.web.gui;
+package ${package}.web.gui;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
-import de.fechtelhoff.web.gui.page.BaseWebPage;
-import de.fechtelhoff.web.gui.panel.WicketSettingsPanel;
+import ${package}.web.gui.page.BaseWebPage;
+import ${package}.web.gui.panel.WicketSettingsPanel;
 
 public class HomePage extends BaseWebPage {
 

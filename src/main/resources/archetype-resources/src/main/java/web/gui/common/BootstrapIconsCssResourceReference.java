@@ -1,4 +1,4 @@
-package de.fechtelhoff.web.gui.common;
+package ${package}.web.gui.common;
 
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.HeaderItem;

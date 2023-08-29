@@ -1,4 +1,4 @@
-package de.fechtelhoff.web;
+package ${package}.web;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -11,7 +11,7 @@ import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchTheme;
 import de.agilecoders.wicket.themes.markup.html.bootswatch.BootswatchThemeProvider;
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
-import de.fechtelhoff.web.gui.HomePage;
+import ${package}.web.gui.HomePage;
 
 public class WicketTestApplication extends WebApplication {
 

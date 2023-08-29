@@ -1,4 +1,4 @@
-package de.fechtelhoff.web.gui.common;
+package ${package}.web.gui.common;
 
 import org.apache.wicket.util.string.Strings;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.IconType;
