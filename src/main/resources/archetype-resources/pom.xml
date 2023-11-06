@@ -38,7 +38,7 @@
 
 		<!-- General-->
 		<version.org.mapstruct>1.5.5.Final</version.org.mapstruct>
-		<version.classgraph>4.8.162</version.classgraph>
+		<version.classgraph>4.8.164</version.classgraph>
 
 		<!-- EE & Co. -->
 		<version.jakartaee>8.0.0</version.jakartaee>
@@ -46,16 +46,16 @@
 		<version.javax.annotation-api>1.3.2</version.javax.annotation-api>
 
 		<!-- Wicket & Co. -->
-		<version.wicket>9.14.0</version.wicket>
-		<version.wicketstuff>9.14.0</version.wicketstuff>
+		<version.wicket>9.15.0</version.wicket>
+		<version.wicketstuff>9.15.0</version.wicketstuff>
 		<version.wicket.bootstrap>6.0.4</version.wicket.bootstrap>
-		<version.bootstrap-icons>1.10.5</version.bootstrap-icons>
+		<version.bootstrap-icons>1.11.1</version.bootstrap-icons>
 
 		<!-- Testing -->
-		<version.junit>5.10.0</version.junit>
+		<version.junit>5.10.1</version.junit>
 		<version.hamcrest>2.2</version.hamcrest>
-		<version.mockito>5.5.0</version.mockito> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-		<version.byte-buddy>1.14.6</version.byte-buddy> <!-- Wird in genau dieser Version für Mockito benötigt. -->
+		<version.mockito>5.7.0</version.mockito> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<version.byte-buddy>1.14.9</version.byte-buddy> <!-- Wird in genau dieser Version für Mockito benötigt. -->
 
 		<!-- ================================================================================== -->
 		<!-- Plugins -->
@@ -66,15 +66,27 @@
 		<version.deploy.plugin>3.1.1</version.deploy.plugin>
 		<version.install.plugin>3.1.1</version.install.plugin>
 		<version.jar.plugin>3.3.0</version.jar.plugin>
-		<version.javadoc.plugin>3.5.0</version.javadoc.plugin>
+		<version.javadoc.plugin>3.6.0</version.javadoc.plugin>
 		<version.resources.plugin>3.3.1</version.resources.plugin>
 		<version.source.plugin>3.3.0</version.source.plugin>
-		<version.surefire.plugin>3.1.2</version.surefire.plugin>
+		<version.surefire.plugin>3.2.1</version.surefire.plugin>
 		<version.war.plugin>3.4.0</version.war.plugin>
 
 		<!-- Other Plugins -->
 		<version.gitflow.plugin>1.20.0</version.gitflow.plugin>
-		<version.versions.plugin>2.16.0</version.versions.plugin>
+		<version.jacoco.plugin>0.8.11</version.jacoco.plugin>
+		<version.owasp.plugin>8.4.2</version.owasp.plugin>
+		<version.sonar.plugin>3.10.0.2594</version.sonar.plugin>
+		<version.versions.plugin>2.16.1</version.versions.plugin>
+
+		<!-- ================================================================================== -->
+		<!-- Sonar -->
+		<!-- ================================================================================== -->
+		<!-- Sonar Source Konfiguration. Wenn nicht gesetzt gilt der Default 1.5 und dann kann Sonar Lambdas etc. nicht analysieren. -->
+		<sonar.java.source>${java.version}</sonar.java.source>
+		<sonar.projectName>${project.name}</sonar.projectName>
+		<sonar.dependencyCheck.htmlReportPath>target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
+		<sonar.dependencyCheck.jsonReportPath>target/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
 	</properties>
 
 	<dependencyManagement>
@@ -388,6 +400,16 @@
 					<version>${version.surefire.plugin}</version>
 				</plugin>
 
+				<!-- JaCoCo (Code Coverage) -->
+				<!-- https://www.jacoco.org/ -->
+				<!-- https://www.jacoco.org/jacoco/trunk/doc/maven.html -->
+				<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${version.jacoco.plugin}</version>
+				</plugin>
+
 				<!-- Install -->
 				<!-- https://maven.apache.org/plugins/maven-install-plugin -->
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
@@ -482,6 +504,34 @@
 					</configuration>
 				</plugin>
 
+				<!-- Sonar -->
+				<!-- https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-maven -->
+				<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+				<!-- https://github.com/SonarSecurityCommunity/dependency-check-sonar-plugin/tree/master/examples/multi-module-maven -->
+				<!-- Aufruf z.B. über: "mvn clean package dependency-check:aggregate sonar:sonar" -->
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${version.sonar.plugin}</version>
+				</plugin>
+
+				<!-- Dependency Check (OWASP) -->
+				<!-- https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html -->
+				<!-- https://mvnrepository.com/artifact/org.owasp/dependency-check-maven -->
+				<!-- Aufruf z.B. über: "mvn clean package dependency-check:aggregate" -->
+				<plugin>
+					<groupId>org.owasp</groupId>
+					<artifactId>dependency-check-maven</artifactId>
+					<version>${version.owasp.plugin}</version>
+					<configuration>
+						<formats>
+							<format>html</format>
+							<format>json</format>
+						</formats>
+						<archiveAnalyzerEnabled>false</archiveAnalyzerEnabled>
+					</configuration>
+				</plugin>
+
 				<!-- Versions -->
 				<!-- https://www.mojohaus.org/versions-maven-plugin/index.html -->
 				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
@@ -494,7 +544,7 @@
 						<!--suppress UnresolvedMavenProperty -->
 						<rulesUri>file:///${session.executionRootDirectory}/maven-version-rules.xml</rulesUri>
 						<!-- Nachfolgende Versionen kommen aus dem Container und sind somit fix.-->
-						<excludeProperties>version.apache.commons.lang, version.slf4j</excludeProperties>
+						<excludeProperties>version.apache.commons.lang, version.slf4j, version.jakartaee, version.byte-buddy</excludeProperties>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -526,6 +576,26 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+
+			<!-- JaCoCo (Code Coverage) -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!-- Source -->

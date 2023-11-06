@@ -2,9 +2,29 @@
 
 echo
 echo "###############################################################################"
-echo "# Start - $(basename $0) ($0)"
+echo "# Start - $(basename "$0") ($0)"
 echo "###############################################################################"
 echo
+
+Help()
+{
+   echo "Usage:"
+   echo "  create-wicket [options] | <groupId> <artifactId> <packageName>"
+   echo
+   echo "If you do not specify \"groupId\", \"artifactId\" and \"packageName\" default values will be used."
+   echo
+   echo "Options:"
+   echo "-h --help    Print this Help."
+}
+
+case $1 in
+  -h | --help) # display Help
+     Help
+     exit;;
+  -*) # Invalid option
+     echo "Error: Invalid option"
+     exit;;
+esac
 
 if [ -z "$1" ]
 then
