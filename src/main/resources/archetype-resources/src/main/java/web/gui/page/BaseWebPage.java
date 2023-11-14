@@ -6,6 +6,9 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import ${package}.web.gui.panel.FooterPanel;
+import ${package}.web.gui.panel.HeaderPanel;
+
 
 public abstract class BaseWebPage extends WebPage implements PageTitled {
 
@@ -25,5 +28,12 @@ public abstract class BaseWebPage extends WebPage implements PageTitled {
 	public void renderHead(final IHeaderResponse response) {
 		super.renderHead(response);
 		HtmlHeaderSupport.renderHead(response);
+	}
+
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		add(new HeaderPanel("header"));
+		add(new FooterPanel("footer"));
 	}
 }

@@ -66,10 +66,10 @@
 		<version.deploy.plugin>3.1.1</version.deploy.plugin>
 		<version.install.plugin>3.1.1</version.install.plugin>
 		<version.jar.plugin>3.3.0</version.jar.plugin>
-		<version.javadoc.plugin>3.6.0</version.javadoc.plugin>
+		<version.javadoc.plugin>3.6.2</version.javadoc.plugin>
 		<version.resources.plugin>3.3.1</version.resources.plugin>
 		<version.source.plugin>3.3.0</version.source.plugin>
-		<version.surefire.plugin>3.2.1</version.surefire.plugin>
+		<version.surefire.plugin>3.2.2</version.surefire.plugin>
 		<version.war.plugin>3.4.0</version.war.plugin>
 
 		<!-- Other Plugins -->
