@@ -58,7 +58,7 @@ echo
 mvn archetype:generate --batch-mode \
   -DarchetypeGroupId=de.fechtelhoff \
   -DarchetypeArtifactId=maven-wicket-template \
-  -DarchetypeVersion=1.0 \
+  -DarchetypeVersion=2.0-SNAPSHOT \
   -DgroupId="${GROUP}" \
   -DartifactId="${ARTIFACT}" \
   -Dversion="${VERSION}" \
