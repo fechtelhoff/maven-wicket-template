@@ -9,7 +9,7 @@ echo
 Help()
 {
    echo "Usage:"
-   echo "  create-wicket [options] | <groupId> <artifactId> <packageName>"
+   echo "  create-wicket-wildfly [options] | <groupId> <artifactId> <packageName>"
    echo
    echo "If you do not specify \"groupId\", \"artifactId\" and \"packageName\" default values will be used."
    echo
@@ -28,7 +28,7 @@ esac
 
 if [ -z "$1" ]
 then
-  GROUP="de.fechtelhoff"
+  GROUP="com.example"
 else
   GROUP="$1"
 fi
@@ -57,7 +57,7 @@ echo
 
 mvn archetype:generate --batch-mode \
   -DarchetypeGroupId=de.fechtelhoff \
-  -DarchetypeArtifactId=maven-wicket-template \
+  -DarchetypeArtifactId=maven-wicket-wildfly-template \
   -DarchetypeVersion=2.0-SNAPSHOT \
   -DgroupId="${GROUP}" \
   -DartifactId="${ARTIFACT}" \
