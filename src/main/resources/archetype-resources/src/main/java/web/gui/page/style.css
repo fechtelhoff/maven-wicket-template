@@ -144,3 +144,8 @@
 .mx-5 {
     margin-left: 3rem !important;
 }
+
+.feedbackPanel ul {
+    list-style-type: none;
+    padding: 0;
+}
