@@ -6,21 +6,21 @@ import ${package}.web.gui.page.BaseWebPage;
 import ${package}.web.gui.panel.WicketSettingsPanel;
 
 @SuppressWarnings("java:S110") // java:S110 -> Inheritance tree of classes should not be too deep.
-public class HomePage extends BaseWebPage {
+public class InfoPage extends BaseWebPage {
 
-	public HomePage() {
+	public InfoPage() {
 		super();
 	}
 
 	@Override
 	public String getPageTitle() {
-		return "Home Page";
+		return "Info Page";
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 		add(new Label("title", Model.of(getPageTitle())));
-		add(new Label("label", "Start here ..."));
+		add(new WicketSettingsPanel("wicketSettingsPanel"));
 	}
 }

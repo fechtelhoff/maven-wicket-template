@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.wicket.markup.html.WebPage;
 import ${package}.web.gui.HomePage;
 import ${package}.web.gui.SecondPage;
+import ${package}.web.gui.InfoPage;
 
 public final class WicketApplicationPrettyUrlConfig {
 
@@ -13,8 +14,9 @@ public final class WicketApplicationPrettyUrlConfig {
 	static {
 		//@formatter:off
 
-		CONFIG.put("/home", HomePage.class);
+		CONFIG.put("/home",   HomePage.class);
 		CONFIG.put("/second", SecondPage.class);
+		CONFIG.put("/info",   InfoPage.class);
 
 		//@formatter:on
 	}
