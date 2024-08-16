@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>${groupId}</groupId>
@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 
 	<name>${artifactId}</name>
-	<description>Simple Apache Wicket Application</description>
+	<description>Simple Apache Wicket Application with WildFly</description>
 
 	<properties>
 		<!-- Encoding  -->
@@ -25,12 +25,11 @@
 
 		<!-- Test Execution -->
 		<skipUTs>false</skipUTs>
-		<skipITs>false</skipITs>
+		<skipITs>true</skipITs>
 
-		<!-- ================================================================================== -->
+		<!-- =================================================================================== -->
 		<!-- Dependencies -->
-		<!-- ================================================================================== -->
-
+		<!-- =================================================================================== -->
 		<!-- Container [BGN] -->
 		<version.wildfly>30.0.1.Final</version.wildfly>
 		<!-- Nachfolgende Dependencies werden mit dem Scope "provided" direkt aus dem Container genutzt. -->
@@ -40,9 +39,9 @@
 		<version.slf4j>2.0.9</version.slf4j>
 		<!-- Container [END] -->
 
-		<!-- General-->
-		<version.org.mapstruct>1.6.0</version.org.mapstruct>
+		<!-- General -->
 		<version.classgraph>4.8.174</version.classgraph>
+		<version.mapstruct>1.6.0</version.mapstruct>
 
 		<!-- EE & Co. -->
 		<version.jakartaee>10.0.0</version.jakartaee>
@@ -56,23 +55,21 @@
 		<version.bootstrap-icons>1.11.3</version.bootstrap-icons>
 
 		<!-- Testing -->
-		<version.junit>5.10.3</version.junit>
+		<version.junit>5.11.0</version.junit>
 		<version.assertj>3.26.3</version.assertj>
 		<version.mockito>5.12.0</version.mockito> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 		<version.byte-buddy>1.14.15</version.byte-buddy> <!-- Wird in genau dieser Version für Mockito benötigt. -->
 
-		<!-- ================================================================================== -->
+		<!-- =================================================================================== -->
 		<!-- Plugins -->
-		<!-- ================================================================================== -->
+		<!-- =================================================================================== -->
 		<!-- Maven Plugins -->
 		<version.compiler.plugin>3.13.0</version.compiler.plugin>
 		<version.failsafe.plugin>3.3.1</version.failsafe.plugin>
-		<version.jar.plugin>3.4.2</version.jar.plugin>
 		<version.javadoc.plugin>3.8.0</version.javadoc.plugin>
 		<version.resources.plugin>3.3.1</version.resources.plugin>
 		<version.source.plugin>3.3.1</version.source.plugin>
 		<version.surefire.plugin>3.3.1</version.surefire.plugin>
-		<version.war.plugin>3.4.0</version.war.plugin>
 
 		<!-- Other Plugins -->
 		<version.gitflow.plugin>1.21.0</version.gitflow.plugin>
@@ -81,10 +78,9 @@
 		<version.sonar.plugin>4.0.0.4121</version.sonar.plugin>
 		<version.versions.plugin>2.17.1</version.versions.plugin>
 
-		<!-- ================================================================================== -->
+		<!-- =================================================================================== -->
 		<!-- Sonar -->
-		<!-- ================================================================================== -->
-		<!-- Sonar Source Konfiguration. Wenn nicht gesetzt gilt der Default 1.5 und dann kann Sonar Lambdas etc. nicht analysieren. -->
+		<!-- =================================================================================== -->
 		<sonar.java.source>${java.version}</sonar.java.source>
 		<sonar.projectName>${project.name}</sonar.projectName>
 		<sonar.dependencyCheck.htmlReportPath>target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
@@ -100,6 +96,77 @@
 				<groupId>org.wildfly.bom</groupId>
 				<artifactId>wildfly-ee</artifactId>
 				<version>${version.wildfly}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Wicket -->
+			<!-- https://wicket.apache.org -->
+			<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-core -->
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-core</artifactId>
+				<version>${version.wicket}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-tester</artifactId>
+				<version>${version.wicket}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Wicket Optional -->
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-extensions</artifactId>
+				<version>${version.wicket}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-cdi</artifactId>
+				<version>${version.wicket}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-auth-roles</artifactId>
+				<version>${version.wicket}</version>
+			</dependency>
+
+			<!-- Wicket Bootstrap -->
+			<!-- https://github.com/l0rdn1kk0n/wicket-bootstrap -->
+			<!-- https://mvnrepository.com/artifact/de.agilecoders.wicket/wicket-bootstrap-core -->
+			<dependency>
+				<groupId>de.agilecoders.wicket</groupId>
+				<artifactId>wicket-bootstrap-core</artifactId>
+				<version>${version.wicket.bootstrap}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.agilecoders.wicket</groupId>
+				<artifactId>wicket-bootstrap-extensions</artifactId>
+				<version>${version.wicket.bootstrap}</version>
+			</dependency>
+			<dependency>
+				<groupId>de.agilecoders.wicket</groupId>
+				<artifactId>wicket-bootstrap-themes</artifactId>
+				<version>${version.wicket.bootstrap}</version>
+			</dependency>
+
+			<!-- WicketStuff -->
+			<!-- https://wicketstuff.org -->
+			<!-- https://mvnrepository.com/artifact/org.wicketstuff/wicketstuff-select2 -->
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-select2</artifactId>
+				<version>${version.wicketstuff}</version>
+			</dependency>
+
+			<!-- JUnit 5 -->
+			<!-- https://junit.org/junit5 -->
+			<!-- https://mvnrepository.com/artifact/org.junit/junit-bom -->
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${version.junit}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -139,65 +206,31 @@
 		</dependency>
 
 		<!-- Wicket -->
-		<!-- https://wicket.apache.org -->
-		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-core -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
-			<version>${version.wicket}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-tester</artifactId>
-			<version>${version.wicket}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<!-- Wicket Optional -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-extensions</artifactId>
-			<version>${version.wicket}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-cdi</artifactId>
-			<version>${version.wicket}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-auth-roles</artifactId>
 			<version>${version.wicket}</version>
 		</dependency>
 
 		<!-- Wicket Bootstrap -->
-		<!-- https://github.com/l0rdn1kk0n/wicket-bootstrap -->
-		<!-- https://mvnrepository.com/artifact/de.agilecoders.wicket/wicket-bootstrap-core -->
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-core</artifactId>
-			<version>${version.wicket.bootstrap}</version>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>de.agilecoders.wicket</groupId>
-			<artifactId>wicket-bootstrap-extensions</artifactId>
-			<version>${version.wicket.bootstrap}</version>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>wicket-bootstrap-themes</artifactId>
-			<version>${version.wicket.bootstrap}</version>
-		</dependency>
-
-		<!-- WicketStuff -->
-		<!-- https://wicketstuff.org -->
-		<!-- https://mvnrepository.com/artifact/org.wicketstuff/wicketstuff-select2 -->
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-select2</artifactId>
-			<version>${version.wicketstuff}</version>
 		</dependency>
 
 		<!-- Bootstrap Icons -->
@@ -219,15 +252,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- MapStruct -->
-		<!-- https://mapstruct.org -->
-		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-			<version>${version.org.mapstruct}</version>
-		</dependency>
-
 		<!-- Classgraph -->
 		<!-- https://github.com/classgraph/classgraph -->
 		<!-- https://mvnrepository.com/artifact/io.github.classgraph/classgraph -->
@@ -236,6 +260,15 @@
 			<artifactId>classgraph</artifactId>
 			<version>${version.classgraph}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- MapStruct -->
+		<!-- https://mapstruct.org -->
+		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${version.mapstruct}</version>
 		</dependency>
 
 		<!-- Logging -->
@@ -256,12 +289,9 @@
 		</dependency>
 
 		<!-- JUnit 5 -->
-		<!-- https://junit.org/junit5 -->
-		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>${version.junit}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -303,8 +333,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
-
 		<resources>
 			<resource>
 				<filtering>false</filtering>
@@ -365,25 +393,10 @@
 						<encoding>${project.encoding}</encoding>
 						<showWarnings>true</showWarnings>
 						<showDeprecation>true</showDeprecation>
+						<compilerArgs>
+							<arg>-parameters</arg>
+						</compilerArgs>
 					</configuration>
-				</plugin>
-
-				<!-- Jar -->
-				<!-- https://maven.apache.org/plugins/maven-jar-plugin -->
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${version.jar.plugin}</version>
-				</plugin>
-
-				<!-- War -->
-				<!-- https://maven.apache.org/plugins/maven-war-plugin -->
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>${version.war.plugin}</version>
 				</plugin>
 
 				<!-- Surefire -->
@@ -460,8 +473,9 @@
 					<version>${version.javadoc.plugin}</version>
 					<executions>
 						<execution>
+							<id>attach-javadocs</id>
 							<goals>
-								<goal>javadoc</goal>
+								<goal>jar</goal>
 							</goals>
 						</execution>
 					</executions>
@@ -491,7 +505,7 @@
 							<releaseBranchPrefix>release-</releaseBranchPrefix>
 							<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
 							<supportBranchPrefix>support-</supportBranchPrefix>
-							<versionTagPrefix></versionTagPrefix>
+							<versionTagPrefix />
 							<origin>origin</origin>
 						</gitFlowConfig>
 						<commitMessages>
@@ -548,6 +562,12 @@
 		</pluginManagement>
 
 		<plugins>
+			<!-- Resources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+
 			<!-- Compiler -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -557,7 +577,7 @@
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
-							<version>${version.org.mapstruct}</version>
+							<version>${version.mapstruct}</version>
 						</path>
 					</annotationProcessorPaths>
 					<annotationProcessors>
@@ -575,6 +595,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 
+			<!-- Failsafe -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+
 			<!-- JaCoCo (Code Coverage) -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -585,6 +611,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<!-- JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
 
 			<!-- GitFlow -->

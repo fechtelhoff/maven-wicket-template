@@ -27,6 +27,7 @@ public class BootstrapIconsCssResourceReference extends WebjarsCssResourceRefere
 		super("bootstrap-icons/current/font/bootstrap-icons.css");
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	public static ResourceReference getInstance() {
 		return INSTANCE;
 	}

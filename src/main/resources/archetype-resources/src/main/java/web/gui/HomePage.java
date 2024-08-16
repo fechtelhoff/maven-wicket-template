@@ -3,7 +3,6 @@ package ${package}.web.gui;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
 import ${package}.web.gui.page.BaseWebPage;
-import ${package}.web.gui.panel.WicketSettingsPanel;
 
 @SuppressWarnings("java:S110") // java:S110 -> Inheritance tree of classes should not be too deep.
 public class HomePage extends BaseWebPage {
